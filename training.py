@@ -102,6 +102,10 @@ def train(
             torch.save(model.state_dict(), PATH)
 
 
+def evaluate_decomposed_model(model):
+    pass
+
+
 def test(testloader, model):
     """
     validating loop
