@@ -32,7 +32,7 @@ python3 main.py [-mode MODE] [-decompose_mode DECOMPMODE] [-cnn_type CNNMODEL] [
 
 ## Results
 #### Computational Result
-| Model | Decompose | Flops | mAdds | Inf time | CPU Pred Time
+| Model | Decomposition | Flops | mAdds | Inf time | CPU Pred Time
 | :----------- | :-----------: | -----------: | :-----------: | :-----------: | :-----------: |
 | Resnet18  |None   | 556.65MFlops | 1.11GMAdd    | 0:00:05.78605   | 0.0564924  |
 | Resnet18  |Tucker | 298.7MFlops  | 596.39MMAdd  | 0:00:03.73833   | 0.0320413  |
@@ -43,7 +43,7 @@ python3 main.py [-mode MODE] [-decompose_mode DECOMPMODE] [-cnn_type CNNMODEL] [
 
 #### Accuracy results
 The goal of this project is not to attain the highest accuracy. We solely wanted to see if we can reduce computational speed without affecting the performance. 
-| Model | Decompose | Accuracy
+| Model | Decomposition | Accuracy
 | :----------- | :-----------: | -----------: |
 | Resnet18  |None   |  79.27%| 
 | Resnet18  |Tucker |  80.21%| 
@@ -53,10 +53,16 @@ The goal of this project is not to attain the highest accuracy. We solely wanted
 | Densenet  |CP     |  58.58% | 
 ## References
 
-https://arxiv.org/pdf/1905.10145.pdf
+https://arxiv.org/pdf/1905.10145.pdf 
+
 https://arxiv.org/pdf/1701.07148.pdf
+
 https://arxiv.org/pdf/1412.6553v3.pdf
+
 https://arxiv.org/abs/1412.6553 
+
 https://arxiv.org/abs/1511.06530
+
 https://iksinc.online/tag/tucker-decomposition/
+
 https://iksinc.online/tag/cp-decomposition/
