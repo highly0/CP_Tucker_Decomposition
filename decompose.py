@@ -67,7 +67,6 @@ def cp_decomposition(layer, rank):
         pointwise_r_to_t_layer,
     ]
     return nn.Sequential(*new_layers)
-    # return
 
 
 def estimate_ranks(layer):
@@ -147,7 +146,9 @@ def decompose_layer(type, layer):
     return the new decomposed conv2d layer
     """
     if type == "CP":
-        new_layer = cp_decomposition(layer)
+        ranks = estimate_ranks(layer)
+        rank = ranks[0] if ranks[0] != 0 else ranks[1]
+        new_layer = cp_decomposition(layer, rank)
     else:
         new_layer = tucker_decomposition(layer)
     return new_layer

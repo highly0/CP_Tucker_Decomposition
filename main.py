@@ -1,5 +1,5 @@
 from data import augumentation, get_data_loaders
-from training import train
+from training import train, evaluate
 import models.densenet as densenet_class
 from models.densenet import DenseNet_
 from models.resnet import ResNet18
@@ -10,15 +10,16 @@ import torch.backends.cudnn as cudnn
 from decompose import decompose_layer
 from comet_ml import Experiment
 import argparse
+from torchstat import stat
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr", default=0.1, type=float, help="learning rate")
 parser.add_argument("--num_epoches", default=50, type=float, help="number of epoches")
 parser.add_argument(
-    "--train_mode",
-    default="normal_train",
-    choices=["decompose", "normal_train", "decompose_train"],
-    help="choose to decompose or train (normal train without decomposition or with decomposition)",
+    "--mode",
+    default="train",
+    choices=["decompose", "train", "evaluate_none", "evaluate_decomposed"],
+    help="choose to decompose, train, or evaluate (normal evaluate without decomposition or with decomposition)",
 )
 parser.add_argument(
     "--decompose_mode",
@@ -44,6 +45,12 @@ def set_up_exp():
     return experiment
 
 
+def custom_print(s):
+    # for writing model stat to text file
+    with open(f"./results/{exp_type}", "w+") as f:
+        print(s, file=f)
+
+
 if __name__ == "__main__":
     args = parser.parse_args()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -52,7 +59,6 @@ if __name__ == "__main__":
     train_loader, val_loader = get_data_loaders(
         train_transform, val_transform, batch_size=128
     )
-
     # models and hyper params
     torch.manual_seed(96)
     if args.cnn_type == "Resnet18":
@@ -72,9 +78,9 @@ if __name__ == "__main__":
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
 
     # decompose mode
-    if args.train_mode == "decompose":
+    if args.mode == "decompose":
         if args.cnn_type == "Resnet18":
-            PATH = "./checkpoints/ResNet_None_50"
+            PATH = f"./checkpoints/ResNet_None_{args.num_epoches}"
             model.load_state_dict(torch.load(PATH))
             model = model.to(device)
             model.eval()
@@ -97,9 +103,14 @@ if __name__ == "__main__":
                         del conv2
                         del bottleneck
                     del layer
-                torch.save(model, f"./checkpoints/ResNet_{args.decompose_mode}_50")
+                torch.save(
+                    model,
+                    f"./checkpoints/ResNet_{args.decompose_mode}_{args.num_epoches}",
+                )
+            print(f"finished {args.decompose_mode} decomposition")
+            stat(model, (3, 32, 32))
         else:
-            PATH = "./checkpoints/DenseNet_None_50"
+            PATH = f"./checkpoints/DenseNet_None_{args.num_epoches}"
             model.load_state_dict(torch.load(PATH))
             model = model.to(device)
             model.eval()
@@ -132,48 +143,46 @@ if __name__ == "__main__":
                             del conv2
                             del bottleneck
                         del layer
-                    torch.save(
-                        model, f"./checkpoints/DenseNet_{args.decompose_mode}_50"
-                    )
-    else:  # training
+                torch.save(
+                    model,
+                    f"./checkpoints/DenseNet_{args.decompose_mode}_{args.num_epoches}",
+                )
+            print(f"finished {args.decompose_mode} decomposition")
+            stat(model, (3, 32, 32))
+    elif args.mode == "train":  # training
         # experiment for plotting
         experiment = set_up_exp()
-        exp_name = f"{model_name}_{args.decompose_mode}_{args.num_epoches}"
+        exp_name = f"{model_name}_None_{args.num_epoches}"
         experiment.set_name(exp_name)
-        if args.train_mode == "normal_train":
-            train(
-                experiment,
-                exp_name,
-                train_loader,
-                val_loader,
-                model,
-                criterion,
-                optimizer,
-                scheduler,
-                device,
-                n_epochs=args.num_epoches,
-            )
-        else:  # train with decomposed model
-            if args.cnn_type == "Resnet18":
-                PATH = f"./checkpoints/ResNet_{args.decompose_mode}_50"
-            else:
-                PATH = f"./checkpoints/DenseNet_{args.decompose_mode}_50"
 
+        train(
+            experiment,
+            exp_name,
+            train_loader,
+            val_loader,
+            model,
+            criterion,
+            optimizer,
+            scheduler,
+            device,
+            n_epochs=args.num_epoches,
+        )
+    else:  # evaluate
+        if args.mode == "evaluate_none":
+            exp_type = f"{model_name}_None_{args.num_epoches}"
+            PATH = f"./checkpoints/{exp_type}"
+            model.load_state_dict(torch.load(PATH))
+            model = model.to("cpu")
+        else:
+            exp_type = f"{model_name}_{args.decompose_mode}_{args.num_epoches}"
+            PATH = f"./checkpoints/{exp_type}"
             model = torch.load(PATH)
-            model = model.to(device)
-            if device == "cuda":
-                model = torch.nn.DataParallel(model)
-                cudnn.benchmark = True
 
-            train(
-                experiment,
-                exp_name,
-                train_loader,
-                val_loader,
-                model,
-                criterion,
-                optimizer,
-                scheduler,
-                device,
-                n_epochs=args.num_epoches,
-            )
+        # calculate flops, mAdds, memory
+        stat(model, (3, 32, 32))
+        model = model.to(device)
+        if device == "cuda":
+            model = torch.nn.DataParallel(model)
+            cudnn.benchmark = True
+
+        evaluate(val_loader, model, device)

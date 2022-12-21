@@ -1,0 +1,137 @@
+Files already downloaded and verified
+Files already downloaded and verified
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+[MAdd]: Sequential is not supported!
+[Flops]: Sequential is not supported!
+[Memory]: Sequential is not supported!
+               module name  input shape output shape     params memory(MB)           MAdd          Flops  MemRead(B)  MemWrite(B) duration[%]   MemR+W(B)
+0                    conv1    3  32  32   64  32  32     1728.0       0.25    3,473,408.0    1,769,472.0     19200.0     262144.0      29.29%    281344.0
+1                      bn1   64  32  32   64  32  32      128.0       0.25      262,144.0      131,072.0    262656.0     262144.0       2.59%    524800.0
+2           layer1.0.conv1   64  32  32   64  32  32    36864.0       0.25   75,431,936.0   37,748,736.0    409600.0     262144.0       9.30%    671744.0
+3             layer1.0.bn1   64  32  32   64  32  32      128.0       0.25      262,144.0      131,072.0    262656.0     262144.0       0.25%    524800.0
+4         layer1.0.conv2.0   64  32  32   22  32  32     1408.0       0.09    2,861,056.0    1,441,792.0    267776.0      90112.0       2.63%    357888.0
+5         layer1.0.conv2.1   22  32  32   22  32  32      198.0       0.09      382,976.0      202,752.0     90904.0      90112.0       1.81%    181016.0
+6         layer1.0.conv2.2   22  32  32   64  32  32     1472.0       0.25    2,883,584.0    1,507,328.0     96000.0     262144.0       1.65%    358144.0
+7             layer1.0.bn2   64  32  32   64  32  32      128.0       0.25      262,144.0      131,072.0    262656.0     262144.0       0.41%    524800.0
+8        layer1.0.shortcut   64  32  32   64  32  32        0.0       0.25            0.0            0.0         0.0          0.0       0.01%         0.0
+9           layer1.1.conv1   64  32  32   64  32  32    36864.0       0.25   75,431,936.0   37,748,736.0    409600.0     262144.0       1.26%    671744.0
+10            layer1.1.bn1   64  32  32   64  32  32      128.0       0.25      262,144.0      131,072.0    262656.0     262144.0       0.25%    524800.0
+11        layer1.1.conv2.0   64  32  32   20  32  32     1280.0       0.08    2,600,960.0    1,310,720.0    267264.0      81920.0       2.56%    349184.0
+12        layer1.1.conv2.1   20  32  32   20  32  32      180.0       0.08      348,160.0      184,320.0     82640.0      81920.0       1.68%    164560.0
+13        layer1.1.conv2.2   20  32  32   64  32  32     1344.0       0.25    2,621,440.0    1,376,256.0     87296.0     262144.0       0.90%    349440.0
+14            layer1.1.bn2   64  32  32   64  32  32      128.0       0.25      262,144.0      131,072.0    262656.0     262144.0       0.35%    524800.0
+15       layer1.1.shortcut   64  32  32   64  32  32        0.0       0.25            0.0            0.0         0.0          0.0       0.01%         0.0
+16          layer2.0.conv1   64  32  32  128  16  16    73728.0       0.12   37,715,968.0   18,874,368.0    557056.0     131072.0       2.60%    688128.0
+17            layer2.0.bn1  128  16  16  128  16  16      256.0       0.12      131,072.0       65,536.0    132096.0     131072.0       0.41%    263168.0
+18        layer2.0.conv2.0  128  16  16   78  16  16     9984.0       0.08    5,091,840.0    2,555,904.0    171008.0      79872.0       2.67%    250880.0
+19        layer2.0.conv2.1   78  16  16   78  16  16      702.0       0.08      339,456.0      179,712.0     82680.0      79872.0       1.87%    162552.0
+20        layer2.0.conv2.2   78  16  16  128  16  16    10112.0       0.12    5,111,808.0    2,588,672.0    120320.0     131072.0       0.59%    251392.0
+21            layer2.0.bn2  128  16  16  128  16  16      256.0       0.12      131,072.0       65,536.0    132096.0     131072.0       0.32%    263168.0
+22     layer2.0.shortcut.0   64  32  32  128  16  16     8192.0       0.12    4,161,536.0    2,097,152.0    294912.0     131072.0       2.20%    425984.0
+23     layer2.0.shortcut.1  128  16  16  128  16  16      256.0       0.12      131,072.0       65,536.0    132096.0     131072.0       0.24%    263168.0
+24          layer2.1.conv1  128  16  16  128  16  16   147456.0       0.12   75,464,704.0   37,748,736.0    720896.0     131072.0       3.25%    851968.0
+25            layer2.1.bn1  128  16  16  128  16  16      256.0       0.12      131,072.0       65,536.0    132096.0     131072.0       0.30%    263168.0
+26        layer2.1.conv2.0  128  16  16   30  16  16     3840.0       0.03    1,958,400.0      983,040.0    146432.0      30720.0       2.09%    177152.0
+27        layer2.1.conv2.1   30  16  16   30  16  16      270.0       0.03      130,560.0       69,120.0     31800.0      30720.0       1.68%     62520.0
+28        layer2.1.conv2.2   30  16  16  128  16  16     3968.0       0.12    1,966,080.0    1,015,808.0     46592.0     131072.0       0.56%    177664.0
+29            layer2.1.bn2  128  16  16  128  16  16      256.0       0.12      131,072.0       65,536.0    132096.0     131072.0       0.35%    263168.0
+30       layer2.1.shortcut  128  16  16  128  16  16        0.0       0.12            0.0            0.0         0.0          0.0       0.01%         0.0
+31          layer3.0.conv1  128  16  16  256   8   8   294912.0       0.06   37,732,352.0   18,874,368.0   1310720.0      65536.0       2.76%   1376256.0
+32            layer3.0.bn1  256   8   8  256   8   8      512.0       0.06       65,536.0       32,768.0     67584.0      65536.0       0.61%    133120.0
+33        layer3.0.conv2.0  256   8   8  119   8   8    30464.0       0.03    3,891,776.0    1,949,696.0    187392.0      30464.0       0.96%    217856.0
+34        layer3.0.conv2.1  119   8   8  119   8   8     1071.0       0.03      129,472.0       68,544.0     34748.0      30464.0       2.05%     65212.0
+35        layer3.0.conv2.2  119   8   8  256   8   8    30720.0       0.06    3,899,392.0    1,966,080.0    153344.0      65536.0       0.40%    218880.0
+36            layer3.0.bn2  256   8   8  256   8   8      512.0       0.06       65,536.0       32,768.0     67584.0      65536.0       0.24%    133120.0
+37     layer3.0.shortcut.0  128  16  16  256   8   8    32768.0       0.06    4,177,920.0    2,097,152.0    262144.0      65536.0       2.06%    327680.0
+38     layer3.0.shortcut.1  256   8   8  256   8   8      512.0       0.06       65,536.0       32,768.0     67584.0      65536.0       0.23%    133120.0
+39          layer3.1.conv1  256   8   8  256   8   8   589824.0       0.06   75,481,088.0   37,748,736.0   2424832.0      65536.0       1.41%   2490368.0
+40            layer3.1.bn1  256   8   8  256   8   8      512.0       0.06       65,536.0       32,768.0     67584.0      65536.0       0.23%    133120.0
+41        layer3.1.conv2.0  256   8   8   48   8   8    12288.0       0.01    1,569,792.0      786,432.0    114688.0      12288.0       1.27%    126976.0
+42        layer3.1.conv2.1   48   8   8   48   8   8      432.0       0.01       52,224.0       27,648.0     14016.0      12288.0       2.07%     26304.0
+43        layer3.1.conv2.2   48   8   8  256   8   8    12544.0       0.06    1,572,864.0      802,816.0     62464.0      65536.0       0.37%    128000.0
+44            layer3.1.bn2  256   8   8  256   8   8      512.0       0.06       65,536.0       32,768.0     67584.0      65536.0       0.28%    133120.0
+45       layer3.1.shortcut  256   8   8  256   8   8        0.0       0.06            0.0            0.0         0.0          0.0       0.01%         0.0
+46          layer4.0.conv1  256   8   8  512   4   4  1179648.0       0.03   37,740,544.0   18,874,368.0   4784128.0      32768.0       0.75%   4816896.0
+47            layer4.0.bn1  512   4   4  512   4   4     1024.0       0.03       32,768.0       16,384.0     36864.0      32768.0       0.24%     69632.0
+48        layer4.0.conv2.0  512   4   4   79   4   4    40448.0       0.00    1,293,072.0      647,168.0    194560.0       5056.0       1.06%    199616.0
+49        layer4.0.conv2.1   79   4   4   79   4   4      711.0       0.00       21,488.0       11,376.0      7900.0       5056.0       1.92%     12956.0
+50        layer4.0.conv2.2   79   4   4  512   4   4    40960.0       0.03    1,294,336.0      655,360.0    168896.0      32768.0       0.34%    201664.0
+51            layer4.0.bn2  512   4   4  512   4   4     1024.0       0.03       32,768.0       16,384.0     36864.0      32768.0       0.25%     69632.0
+52     layer4.0.shortcut.0  256   8   8  512   4   4   131072.0       0.03    4,186,112.0    2,097,152.0    589824.0      32768.0       0.41%    622592.0
+53     layer4.0.shortcut.1  512   4   4  512   4   4     1024.0       0.03       32,768.0       16,384.0     36864.0      32768.0       0.23%     69632.0
+54          layer4.1.conv1  512   4   4  512   4   4  2359296.0       0.03   75,489,280.0   37,748,736.0   9469952.0      32768.0       1.37%   9502720.0
+55            layer4.1.bn1  512   4   4  512   4   4     1024.0       0.03       32,768.0       16,384.0     36864.0      32768.0       0.27%     69632.0
+56        layer4.1.conv2.0  512   4   4   12   4   4     6144.0       0.00      196,416.0       98,304.0     57344.0        768.0       0.64%     58112.0
+57        layer4.1.conv2.1   12   4   4   12   4   4      108.0       0.00        3,264.0        1,728.0      1200.0        768.0       1.73%      1968.0
+58        layer4.1.conv2.2   12   4   4  512   4   4     6656.0       0.03      196,608.0      106,496.0     27392.0      32768.0       0.32%     60160.0
+59            layer4.1.bn2  512   4   4  512   4   4     1024.0       0.03       32,768.0       16,384.0     36864.0      32768.0       0.85%     69632.0
+60       layer4.1.shortcut  512   4   4  512   4   4        0.0       0.03            0.0            0.0         0.0          0.0       0.01%         0.0
+61                  linear          512           10     5130.0       0.00       10,230.0        5,120.0     22568.0         40.0       0.55%     22608.0
+total                                                 5124386.0       6.04  549,371,638.0  275,198,704.0     22568.0         40.0     100.00%  31863728.0
+=========================================================================================================================================================
+Total params: 5,124,386
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Total memory: 6.04MB
+Total MAdd: 549.37MMAdd
+Total Flops: 275.2MFlops
+Total MemR+W: 30.39MB
+
+CPU prediction time 0.03049609630922728 79
+inference time: 0:00:03.565069
+Accuracy of the network on the test images: 79.21 %
