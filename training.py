@@ -1,11 +1,15 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from time import gmtime, strftime
 from tqdm import tqdm
+import time
+from datetime import timedelta
 
 
 def epoch_train(loader, model, criterion, opt, device):
+    """
+    training per epoch
+    """
     model.train(True)
     model.eval()
 
@@ -38,6 +42,9 @@ def epoch_train(loader, model, criterion, opt, device):
 
 
 def epoch_val(loader, model, criterion, device):
+    """
+    validating per epoch
+    """
     model.train(True)
     model.eval()
     total_loss = 0.0
@@ -102,27 +109,32 @@ def train(
             torch.save(model.state_dict(), PATH)
 
 
-def evaluate_decomposed_model(model):
-    pass
-
-
-def test(testloader, model):
+def evaluate(testloader, model, device):
     """
-    validating loop
+    evaluate loop
     """
     correct = 0
     total = 0
+    start = time.time()
+    total_time = 0
 
     with torch.no_grad():
-        for data in testloader:
+        for i, data in enumerate(testloader):
             images, labels = data
+            t0 = time.time()
+            images = images.to(device)
+            labels = labels.to(device)
+
             # calculate outputs by running images through the network
             outputs = model(images)
+            t1 = time.time()
+            total_time = total_time + (t1 - t0)
             # the class with the highest energy is what we choose as prediction
             _, predicted = torch.max(outputs.data, 1)
-            total += labels.size(0)
             correct += (predicted == labels).sum().item()
-
+    time_elapse = time.time() - start
+    print("CPU prediction time", float(total_time) / (i + 1), i + 1)
+    print("inference time:", str(timedelta(seconds=time_elapse)))
     print(
-        f"Accuracy of the network on the 10000 test images: {100 * correct // total} %"
+        f"Accuracy of the network on the test images: {100 * correct / len(testloader.dataset)} %"
     )
